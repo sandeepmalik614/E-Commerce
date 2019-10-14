@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,13 +33,13 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog pd;
     private FirebaseFirestore mFireStore;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setStatusBarTransparent(this);
-        
+
         edt_name = findViewById(R.id.edt_registerName);
         edt_email = findViewById(R.id.edt_registerEmail);
         edt_phone = findViewById(R.id.edt_registerPhone);
@@ -51,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         pd = new ProgressDialog(this);
         pd.setMessage("Please wait...");
         pd.setCancelable(false);
-        
+
     }
 
     public void goToLoginFromRegister(View view) {
@@ -59,19 +60,19 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void validateRegister(View view) {
-        if(edt_name.getText().toString().isEmpty()){
+        if (edt_name.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter name", Toast.LENGTH_SHORT).show();
-        }else if(edt_email.getText().toString().isEmpty()){
+        } else if (edt_email.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter email-id", Toast.LENGTH_SHORT).show();
-        }else if(edt_phone.getText().toString().isEmpty()){
+        } else if (edt_phone.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter mobile number", Toast.LENGTH_SHORT).show();
-        }else if(edt_pass.getText().toString().isEmpty()){
+        } else if (edt_pass.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter pass", Toast.LENGTH_SHORT).show();
-        }else if(!edt_pass.getText().toString().equals(edt_con_pass.getText().toString())){
+        } else if (!edt_pass.getText().toString().equals(edt_con_pass.getText().toString())) {
             Toast.makeText(this, "Password and Confirm Password should be same", Toast.LENGTH_SHORT).show();
-        }else if(!cb.isChecked()){
+        } else if (!cb.isChecked()) {
             Toast.makeText(this, "You have to accept the terms", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             registerUser(view, edt_name.getText().toString(), edt_email.getText().toString(), edt_phone.getText().toString(), edt_pass.getText().toString());
         }
     }
@@ -81,37 +82,33 @@ public class RegisterActivity extends AppCompatActivity {
         pd.show();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    FirebaseUser user = task.getResult().getUser();
-                    HashMap<Object, String> userData = new HashMap<>();
-                    userData.put("UserName", name);
-                    userData.put("UserEmail", email);
-                    userData.put("UserPhone", phone);
-                    userData.put("UserId", user.getUid());
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = task.getResult().getUser();
+                            HashMap<Object, String> userData = new HashMap<>();
+                            userData.put("UserName", name);
+                            userData.put("UserEmail", email);
+                            userData.put("UserPhone", phone);
+                            userData.put("UserId", user.getUid());
 
-                    mFireStore.collection(userTabel)
-                            .add(userData)
-                            .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                    pd.dismiss();
-                                    view.setClickable(false);
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        Toast.makeText(RegisterActivity.this, ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                    Toast.makeText(RegisterActivity.this, "Welcome: "+task.getResult().getUser().getEmail(), Toast.LENGTH_SHORT).show();
-                }else{
-                    pd.dismiss();
-                    view.setClickable(true);
-                    Toast.makeText(RegisterActivity.this, ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                            mFireStore.collection(userTabel)
+                                    .document(user.getUid())
+                                    .set(userData)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            pd.dismiss();
+                                            view.setClickable(false);
+                                            Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            pd.dismiss();
+                            view.setClickable(true);
+                            Toast.makeText(RegisterActivity.this, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
