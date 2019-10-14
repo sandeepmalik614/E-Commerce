@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fullScreenBackgroundColor"
+    tools:context=".activity.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:text="Log into \nyour account"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/white"
+            android:elevation="6dp"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:textColorHint="@color/gray">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:paddingTop="4dp"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:textColorHint="@color/gray"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="4dp"
+                    android:text="Forgot ?"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:onClick="goToForgot"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Don't have an account? Create one."
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:onClick="goToRegister"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/gray_capsule_button"
+            android:elevation="12dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Log in"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:onClick="validateLogin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Or sign up with social account."
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_capsule"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_facebook"
+                android:onClick="fbLogin"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_capsule"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_google"
+                android:onClick="googleLogin"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
