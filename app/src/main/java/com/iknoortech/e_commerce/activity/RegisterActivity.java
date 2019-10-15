@@ -11,19 +11,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.iknoortech.e_commerce.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.iknoortech.e_commerce.utils.AppConstant.userTabel;
+import static com.iknoortech.e_commerce.utils.AppUtils.registerNewUser;
 import static com.iknoortech.e_commerce.utils.AppUtils.setStatusBarTransparent;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -86,23 +81,10 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = task.getResult().getUser();
-                            HashMap<Object, String> userData = new HashMap<>();
-                            userData.put("UserName", name);
-                            userData.put("UserEmail", email);
-                            userData.put("UserPhone", phone);
-                            userData.put("UserId", user.getUid());
-
-                            mFireStore.collection(userTabel)
-                                    .document(user.getUid())
-                                    .set(userData)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            pd.dismiss();
-                                            view.setClickable(false);
-                                            Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                            registerNewUser(user, "Normal");
+                            pd.dismiss();
+                            view.setClickable(false);
+                            Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                         } else {
                             pd.dismiss();
                             view.setClickable(true);

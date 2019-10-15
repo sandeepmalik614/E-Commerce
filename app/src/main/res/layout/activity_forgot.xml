@@ -65,6 +65,7 @@
         android:layout_marginTop="32dp"
         android:text="Send"
         android:elevation="12dp"
+        android:onClick="sendForgotEmail"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:background="@drawable/gray_capsule_button"

@@ -31,10 +31,17 @@ public class SplashActivity extends AppCompatActivity {
         signIn = findViewById(R.id.button);
         tv_skip = findViewById(R.id.textView2);
 
-        Animation fadeIn = AnimationUtils
-                .loadAnimation(this, R.anim.fade_in);
-        signIn.startAnimation(fadeIn);
-        tv_skip.startAnimation(fadeIn);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                signIn.setVisibility(View.VISIBLE);
+                tv_skip.setVisibility(View.VISIBLE);
+                Animation fadeIn = AnimationUtils
+                        .loadAnimation(SplashActivity.this, R.anim.fade_in);
+                signIn.startAnimation(fadeIn);
+                tv_skip.startAnimation(fadeIn);
+            }
+        }, 1500);
     }
 
     public void goToLogin(View view) {
@@ -43,10 +50,10 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(doubleClickDisabled){
+        if (doubleClickDisabled) {
             finish();
             super.onBackPressed();
-        }else{
+        } else {
             doubleClickDisabled = true;
             Toast.makeText(this, "Click BACK again to exit.", Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {

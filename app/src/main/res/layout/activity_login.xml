@@ -47,6 +47,7 @@
                     android:textColorHint="@color/gray">
 
                     <EditText
+                        android:id="@+id/edt_loginEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -73,6 +74,7 @@
                     app:passwordToggleEnabled="true">
 
                     <EditText
+                        android:id="@+id/edt_loginPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -148,7 +150,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:src="@drawable/ic_facebook"
+                app:srcCompat="@drawable/ic_facebook"
                 android:onClick="fbLogin"/>
 
             <ImageView
@@ -162,8 +164,14 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:src="@drawable/ic_google"
+                app:srcCompat="@drawable/ic_google"
                 android:onClick="googleLogin"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnFbLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
