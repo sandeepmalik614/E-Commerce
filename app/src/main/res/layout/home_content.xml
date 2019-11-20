@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/custom_toolbar"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:background="@color/colorPrimary">
+
+                    <TextView
+                        android:id="@+id/tv_mainSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Search for Phone, clothes and more..."
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_search_gray_24dp"
+                        android:drawablePadding="16dp"
+                        android:paddingLeft="16dp"
+                        android:singleLine="true"
+                        android:background="@drawable/white_capsule"/>
+
+                </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vp_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"/>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tb_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_alignParentBottom="true"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_main_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:clipToPadding="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recommended categories"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:id="@+id/tv_reco_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size"
+                    android:text="VIEW MORE"
+                    android:layout_marginRight="16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_reco_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_reco_main"
+                    android:layout_marginTop="8dp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginBottom="8dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimary">
+
+        <com.iknoortech.e_commerce.utils.CircleImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/white_border_circle"
+            android:padding="4dp"
+            android:src="@drawable/ic_person_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Hello"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView"
+            app:layout_constraintTop_toTopOf="@+id/circleImageView" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Username"
+            android:textColor="@color/white"
+            android:textSize="@dimen/heading_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/nav_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:text="Home"/>
+
+    <TextView
+        android:id="@+id/nav_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="Categories"/>
+
+
+    <TextView
+        android:id="@+id/nav_orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="My Orders"/>
+
+
+    <TextView
+        android:id="@+id/nav_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="My Favorites"/>
+
+
+    <TextView
+        android:id="@+id/nav_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="Help"/>
+
+
+    <TextView
+        android:id="@+id/nav_signout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="Sign out"/>
+
+
+</LinearLayout>

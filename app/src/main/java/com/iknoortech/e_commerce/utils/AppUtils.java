@@ -8,16 +8,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.view.WindowManager;
-
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-
-import static com.iknoortech.e_commerce.utils.AppConstant.userTable;
 
 public class AppUtils {
 
@@ -52,17 +47,7 @@ public class AppUtils {
                 Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
-    public static void registerNewUser(FirebaseUser user, String regiterType) {
-        HashMap<Object, String> userData = new HashMap<>();
-        userData.put("UserName", user.getDisplayName());
-        userData.put("UserEmail", user.getEmail());
-        userData.put("UserPhone", user.getPhoneNumber());
-        userData.put("UserId", user.getUid());
-        userData.put("RegisterType", regiterType);
-        userData.put("RegisterDate", getCurrentDateTimeInString());
-        FirebaseFirestore mFireStore = FirebaseFirestore.getInstance();
-        mFireStore.collection(userTable)
-                .document(user.getUid())
-                .set(userData);
+    public static void showNoInternetToast(Context context){
+        Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
     }
 }

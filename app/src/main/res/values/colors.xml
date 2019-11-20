@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#808080</color>
+    <color name="colorPrimary">#57A85A</color>
+    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorAccent">#9B9B9B</color>
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="gray">#808080</color>
     <color name="grayButton">#232429</color>
+    <color name="redDot">#D81515</color>
     <color name="fullScreenBackgroundColor">#e6dfd7</color>
 </resources>

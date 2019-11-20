@@ -1,96 +1,56 @@
 package com.iknoortech.e_commerce.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.iknoortech.e_commerce.R;
-
-import static com.iknoortech.e_commerce.utils.AppUtils.registerNewUser;
-import static com.iknoortech.e_commerce.utils.AppUtils.setStatusBarTransparent;
+import com.iknoortech.e_commerce.utils.AppUtils;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText edt_name, edt_email, edt_phone, edt_pass, edt_con_pass;
-    private CheckBox cb;
-    private FirebaseAuth mAuth;
-    private ProgressDialog pd;
-    private FirebaseFirestore mFireStore;
+    private EditText edt_firstName, edt_lastName, edt_email, edt_password, edt_conPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        setStatusBarTransparent(this);
 
-        edt_name = findViewById(R.id.edt_registerName);
-        edt_email = findViewById(R.id.edt_registerEmail);
-        edt_phone = findViewById(R.id.edt_registerPhone);
-        edt_pass = findViewById(R.id.edt_registerPass);
-        edt_con_pass = findViewById(R.id.edt_registerConPass);
-        cb = findViewById(R.id.cb_regirster);
+        edt_firstName = findViewById(R.id.edt_register_firstName);
+        edt_lastName = findViewById(R.id.edt_register_lastName);
+        edt_email = findViewById(R.id.edt_register_email);
+        edt_password = findViewById(R.id.edt_register_password);
+        edt_conPass = findViewById(R.id.edt_register_conPass);
 
-        mAuth = FirebaseAuth.getInstance();
-        mFireStore = FirebaseFirestore.getInstance();
-        pd = new ProgressDialog(this);
-        pd.setMessage("Please wait...");
-        pd.setCancelable(false);
-
-    }
-
-    public void goToLoginFromRegister(View view) {
-        finish();
     }
 
     public void validateRegister(View view) {
-        if (edt_name.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please enter name", Toast.LENGTH_SHORT).show();
-        } else if (edt_email.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please enter email-id", Toast.LENGTH_SHORT).show();
-        } else if (edt_phone.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please enter mobile number", Toast.LENGTH_SHORT).show();
-        } else if (edt_pass.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please enter pass", Toast.LENGTH_SHORT).show();
-        } else if (!edt_pass.getText().toString().equals(edt_con_pass.getText().toString())) {
-            Toast.makeText(this, "Password and Confirm Password should be same", Toast.LENGTH_SHORT).show();
-        } else if (!cb.isChecked()) {
-            Toast.makeText(this, "You have to accept the terms", Toast.LENGTH_SHORT).show();
-        } else {
-            registerUser(view, edt_name.getText().toString(), edt_email.getText().toString(), edt_phone.getText().toString(), edt_pass.getText().toString());
+        if(AppUtils.isConnectionAvailable(this)) {
+            if (edt_firstName.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please enter your first name", Toast.LENGTH_SHORT).show();
+            } else if (edt_lastName.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please enter your last name", Toast.LENGTH_SHORT).show();
+            } else if (edt_email.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please enter your email id", Toast.LENGTH_SHORT).show();
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(edt_email.getText().toString()).matches()) {
+                Toast.makeText(this, "Please enter a valid email id", Toast.LENGTH_SHORT).show();
+            } else if (edt_password.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
+            } else if (!edt_password.getText().toString().equals(edt_conPass.getText().toString())) {
+                Toast.makeText(this, "Password and confirm password should be same", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "All done", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            AppUtils.showNoInternetToast(this);
         }
     }
 
-    private void registerUser(final View view, final String name, final String email, final String phone, String password) {
-        view.setClickable(false);
-        pd.show();
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = task.getResult().getUser();
-                            registerNewUser(user, "Normal");
-                            pd.dismiss();
-                            view.setClickable(false);
-                            Toast.makeText(RegisterActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                        } else {
-                            pd.dismiss();
-                            view.setClickable(true);
-                            Toast.makeText(RegisterActivity.this, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+    public void goToLogin(View view) {
+        finish();
     }
 }

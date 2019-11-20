@@ -21,18 +21,6 @@ public class AppPrefference {
         mPrefsEditor.apply();
     }
 
-    public static boolean isIntroComplete(Context ctx) {
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return mPrefs.getBoolean("intro", false);
-    }
-
-    public static void setIntroComplete(Context ctx, Boolean value) {
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        mPrefsEditor = mPrefs.edit();
-        mPrefsEditor.putBoolean("intro", value);
-        mPrefsEditor.apply();
-    }
-
     public static void setUserId(Context ctx, String id){
         mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         mPrefsEditor = mPrefs.edit();
@@ -79,18 +67,6 @@ public class AppPrefference {
     public static String getUserName(Context ctx){
         mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         return mPrefs.getString("userName", "");
-    }
-
-    public static String getFirebaseToken(Context ctx) {
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return mPrefs.getString("FirebaseToken", "");
-    }
-
-    public static void setFirebaseToken(Context ctx, String value) {
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        mPrefsEditor = mPrefs.edit();
-        mPrefsEditor.putString("FirebaseToken", value);
-        mPrefsEditor.commit();
     }
 
     public static void clearAllPreferences(Context ctx) {
